@@ -2,35 +2,24 @@ from django.db import models
 
 from cinema.models import *
 from accounts.models import *
+from movies.models import Movie
 
-class SeatCategory(models.Model):
-    name = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
 
-    def __str__(self):
-        return f'{self.name} -- {self.price}'
-    
-    class Meta:
-        db_table = 'seatcategory'
-        managed = True
-        verbose_name = 'SeatCategory'
-        verbose_name_plural = 'SeatCategorys' 
-
-class SeatPlace(models.Model):
+class Show(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE)
-    category = models.ForeignKey(SeatCategory, on_delete=models.CASCADE)
-    is_active = models.BooleanField(default=True)
-    row = models.BigIntegerField()
-    call = models.BigIntegerField()
+    showing_time = models.TimeField()
+    showing_date = models.DateField()
 
     def __str__(self):
-        return f'{self.hall} -- {self.category} -- {self.is_active}'
+        return f'{self.movie} -- {self.hall.name} -- {self.showing_date} '
     
     class Meta:
-        db_table = 'seateplace'
+        db_table = 'show'
         managed = True
-        verbose_name = 'SeatePlace'
-        verbose_name_plural = 'SeatePlaces' 
+        verbose_name = 'Show'
+        verbose_name_plural = 'Shows'  
+
 
 class Ticket(models.Model):
     seanse = models.ForeignKey(Show, on_delete=models.CASCADE)
@@ -45,6 +34,8 @@ class Ticket(models.Model):
         managed = True
         verbose_name = 'Ticket'
         verbose_name_plural = 'Tickets' 
+
+
 
 class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
