@@ -14,7 +14,7 @@ class CustomUserAdmin(admin.ModelAdmin):
             "fields":('email','password'),
         }),
         ('Extra_Info',{
-            "fields":('username','first_name','last_name'),
+            "fields":('first_name','last_name'),
         }),
         ('Status_Info',{
             "fields":('is_superuser','is_active','is_staff'),
@@ -23,5 +23,5 @@ class CustomUserAdmin(admin.ModelAdmin):
             "fields":('date_joined','last_login'),
         }),
     )
-    search_fields = ('email','username','is_superuser')
-    list_filter = ('email','username','is_superuser')
+    search_fields = ('email','is_superuser')
+    list_filter = ('email','is_superuser')
