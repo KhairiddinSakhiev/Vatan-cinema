@@ -1,5 +1,5 @@
 from django.db import models
-from movies.models import Movie
+
 
 class Theater(models.Model):
     name = models.CharField(max_length=255)
@@ -30,17 +30,36 @@ class Hall(models.Model):
         verbose_name = 'Hall'
         verbose_name_plural = 'Halls' 
 
-class Show(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    hall = models.ForeignKey(Hall, on_delete=models.CASCADE)
-    showing_time = models.TimeField()
-    showing_date = models.DateField()
+
+
+class SeatCategory(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
-        return f'{self.movie} -- {self.hall.name} -- {self.showing_date} '
+        return f'{self.name} -- {self.price}'
     
     class Meta:
-        db_table = 'show'
+        db_table = 'seatcategory'
         managed = True
-        verbose_name = 'Show'
-        verbose_name_plural = 'Shows'     
+        verbose_name = 'SeatCategory'
+        verbose_name_plural = 'SeatCategorys' 
+
+class SeatPlace(models.Model):
+    hall = models.ForeignKey(Hall, on_delete=models.CASCADE)
+    category = models.ForeignKey(SeatCategory, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
+    row = models.BigIntegerField()
+    call = models.BigIntegerField()
+
+    def __str__(self):
+        return f'{self.hall} -- {self.category} -- {self.is_active}'
+    
+    class Meta:
+        db_table = 'seateplace'
+        managed = True
+        verbose_name = 'SeatePlace'
+        verbose_name_plural = 'SeatePlaces' 
+
+
+   
