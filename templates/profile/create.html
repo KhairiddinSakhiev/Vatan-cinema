@@ -1,0 +1,26 @@
+<h2>Создать профиль</h2>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  
+  <label>Телефон:</label><br>
+  <input type="text" name="phone" required><br><br>
+
+  <label>Возраст:</label><br>
+  <input type="number" name="age" required><br><br>
+
+  <label>Дата рождения:</label><br>
+  <input type="date" name="birth_date"><br><br>
+
+  <label>Пол:</label><br>
+  <select name="gender">
+    <option value="">Выбрать</option>
+    <option value="M">Мужской</option>
+    <option value="F">Женский</option>  
+  </select><br><br>
+
+  <label>Фото:</label><br>
+  <input type="file" name="image"><br><br>
+
+  <button type="submit">Создать</button>
+</form>

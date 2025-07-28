@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Профиль пользователя</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 30px auto;
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .profile-image {
+      display: block;
+      margin: 20px auto;
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border: 3px solid #4a90e2;
+    }
+    .no-image {
+      text-align: center;
+      font-style: italic;
+      color: #777;
+      margin: 20px 0;
+    }
+    .profile-info {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #444;
+    }
+    .profile-info p {
+      margin: 8px 0;
+    }
+    .actions {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .actions a {
+      text-decoration: none;
+      color: white;
+      background-color: #4a90e2;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin: 0 10px;
+      transition: background-color 0.3s ease;
+    }
+    .actions a:hover {
+      background-color: #357ABD;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Профиль пользователя</h2>
+
+  {% if profile.image %}
+    <img src="{{ profile.image.url }}" alt="Фото профиля" class="profile-image" />
+  {% else %}
+    <p class="no-image">Фото профиля отсутствует</p>
+  {% endif %}
+
+  <div class="profile-info">
+    <p><strong>Телефон:</strong> {{ profile.phone }}</p>
+    <p><strong>Возраст:</strong> {{ profile.age }}</p>
+    <p><strong>Дата рождения:</strong> {{ profile.birth_date|default:"Не указана" }}</p>
+    <p><strong>Пол:</strong>
+      {% if profile.gender == "M" %}
+        Мужской
+      {% elif profile.gender == "F" %}
+        Женский
+      {% else %}
+        Не указан
+      {% endif %}
+    </p>
+  </div>
+
+  <div class="actions">
+    <a href="{% url 'profile_edit' %}">Редактировать профиль</a>
+  </div>
+
+</body>
+</html>
