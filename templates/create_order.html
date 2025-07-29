@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Оформление заказа</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #363636;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 950px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            height: 650px;
+            background-color: #404040;
+        }
+        .left-section, .right-section {
+            padding: 40px 35px;
+            box-sizing: border-box;
+        }
+        .left-section {
+            flex: 1.2;
+            color: #ccc;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .right-section {
+            flex: 1;
+            background-color: #ba572d;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex-grow: 1;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 6px;
+            font-size: 0.95em;
+        }
+        select, input {
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #555;
+            background-color: #505050;
+            color: #eee;
+            font-size: 1em;
+        }
+        select:focus, input:focus {
+            border-color: #f77f00;
+            outline: none;
+        }
+        .pay-now-button {
+            margin-top: auto;
+            padding: 16px;
+            font-size: 1.2em;
+            background-color: #cd4c4c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s ease;
+            font-weight: 500;
+        }
+        .pay-now-button:hover {
+            background-color: #b34242;
+        }
+        .order-details {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .detail-item h3 {
+            margin: 0;
+            font-weight: 400;
+            font-size: 1em;
+            color: #eee;
+        }
+        .detail-item p {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+        .total-price h3 {
+            margin-bottom: 6px;
+            font-weight: 400;
+            font-size: 1em;
+        }
+        .total-price p {
+            font-size: 2em;
+            color: #f7d540;
+            font-weight: 700;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" action="{% url 'order' %}" class="left-section">
+            {% csrf_token %}
+            <h2 style="color: #fff;">Оформление заказа</h2>
+
+            <div class="form-group">
+                <label for="users">Пользователь:</label>
+                <select name="users" id="users" required>
+                    <option value="" disabled selected>Выберите пользователя</option>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{user.email}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="ticket">Билет:</label>
+                <select name="ticket" id="ticket" required>
+                    <option value="" disabled selected>Выберите билет</option>
+                    {% for ticket in tickets %}
+                        <option value="{{ ticket.id }}">{{ ticket.name }} — {{ ticket.price }} с.</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="payment">Способ оплаты:</label>
+                <select name="payment_status" id="payment" required>
+                    <option value="" disabled selected>Выберите способ оплаты</option>
+                    <option value="card">Банковская карта</option>
+                    <option value="cash">Наличными</option>
+                </select>
+            </div>
+
+            <button type="submit" class="pay-now-button">Оплатить</button>
+        </form>
+
+        <div class="right-section">
+            <div class="order-details">
+                <div class="detail-item">
+                    <h3>Место:</h3>
+                    <p>Кинотеатр Ватан</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Фильм:</h3>
+                    <p>Горные Просторы</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Сеанс:</h3>
+                    <p>4 ноября в 15:00</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Места:</h3>
+                    <p>1 билет - ряд 1, место 1</p>
+                </div>
+            </div>
+            <div class="total-price">
+                <h3>К оплате:</h3>
+                <p>30 с.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
