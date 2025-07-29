@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'cinema.apps.CinemaConfig',
     'movies.apps.MoviesConfig',
     'reviews.apps.ReviewsConfig',
-    'tickets.apps.TicketsConfig'
+    'tickets.apps.TicketsConfig',
+    'comments.apps.CommentsConfig',
 ]
 
 MIDDLEWARE = [
