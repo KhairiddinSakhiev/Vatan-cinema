@@ -1,6 +1,6 @@
 from django.db import models
 
-class Movie(models.Model):
+class Movie(models.Model): 
     title = models.CharField(max_length=255)
     description = models.TextField()
     age_limit = models.CharField(max_length=3)
@@ -25,6 +25,7 @@ class Actor(models.Model):
     experience = models.BigIntegerField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.name} -- {self.is_active}'
@@ -91,3 +92,25 @@ class Trailer(models.Model):
         managed = True
         verbose_name = 'Trailer'
         verbose_name_plural = 'Trailers'     
+
+
+#-#-#-#-#-#-#-#-#- 
+#search
+#home page
+#filter
+#show all films
+#add movie_category in models
+#add img in actors
+#from tickets.models import show -> in view
+
+class MovieCategory(models.Model):
+    name = models.CharField()
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        db_table = 'movie_category'
+        verbose_name = 'Movie Category'
+        verbose_name_plural = 'Movie Categories'
+
