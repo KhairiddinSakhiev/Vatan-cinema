@@ -49,4 +49,4 @@ class Order(models.Model):
         db_table = 'order'
         managed = True
         verbose_name = 'Order'
-        verbose_name_plural = 'Orders' 
+        verbose_name_plural = 'Orders'

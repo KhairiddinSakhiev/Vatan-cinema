@@ -24,5 +24,5 @@ urlpatterns = [
     # path('auth/',include('cinema.urls')),
     # path('auth/',include('movies.urls')),
     # path('auth/',include('reviews.urls')),
-    # path('auth/',include('tickets.urls')),
+    path('tickets/',include('tickets.urls')),
 ]
