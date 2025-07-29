@@ -1,20 +1,5 @@
 from django.contrib import admin
-<<<<<<< HEAD
 from .models import Movie,Actor,MovieActor,Director,MovieDirector,Trailer
-
-"""
-=======
-from .models import *
-
->>>>>>> 9e07eaa1105cb1c6ad94bfcce133ba2448ba5f74
-admin.site.register(Movie)
-admin.site.register(Actor)
-admin.site.register(MovieActor)
-admin.site.register(Director)
-admin.site.register(MovieDirector)
-<<<<<<< HEAD
-admin.site.register(Trailer)
-"""
 
 
 @admin.register(Movie)
@@ -91,6 +76,3 @@ class TrailerAdmin(admin.ModelAdmin):
     )
     search_fields = ('movie','is_active',)
     list_filter = ('movie','is_active',)
-=======
-admin.site.register(Trailer)
->>>>>>> 9e07eaa1105cb1c6ad94bfcce133ba2448ba5f74
