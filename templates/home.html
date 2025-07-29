@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}home page{% endblock title %}
+
+{% block main %}
+{% if trailers %}
+    <h2>Популярные трейлеры</h2>
+    <ul>
+        {% for trailer in trailers %}
+            <li>
+                <img src="{{ trailer.image.url }}" alt="" width="150">
+                {{ trailer.movie.title }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form method="get">
+    <input type="text" name="search" placeholder="Поиск..." value="{{ request.GET.search }}">
+    <select name="category">
+        <option value="">Все категории</option>
+        {% for cat in categories %}
+            <option value="{{ cat.id }}"
+                { % if request.GET.get('category') == cat.id|stringformat:'s' % } selected {% endif %}>
+                {{ cat.name }}
+            </option>
+        {% endfor %}
+    </select>
+    <button type="submit">Найти</button>
+</form>
+
+<h2>Фильмы</h2>
+<ul>
+{% for movie in movies %}
+    <li>
+        <img src="{{ movie.image.url }}" alt="" width="100">
+        <strong>{{ movie.title }}</strong> ({{ movie.rel_year }})
+    </li>
+{% empty %}
+    <li>Нет фильмов</li>
+{% endfor %}
+</ul>
+{% endblock main %}
