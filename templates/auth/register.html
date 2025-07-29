@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Регистрация</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #849bb8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            width: 360px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #222;
+            text-transform: capitalize;
+        }
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-top: 6px;
+            border: 1.8px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.25s ease;
+        }
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            border-color: #3b82f6;
+            outline: none;
+        }
+        input[type="submit"] {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px 0;
+            background-color: #3b82f6;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        input[type="submit"]:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required />
+        
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required />
+        
+        <label for="confirm_password">Confirm password</label>
+        <input type="password" name="confirm_password" id="confirm_password" required />
+        
+        <label for="first_name">First name</label>
+        <input type="text" name="first_name" id="first_name" required />
+        
+        <label for="last_name">Last name</label>
+        <input type="text" name="last_name" id="last_name" required />
+        
+        <input type="submit" value="Register" />
+    </form>
+</body>
+</html>

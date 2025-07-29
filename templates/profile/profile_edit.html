@@ -1,0 +1,29 @@
+<h2>Редактировать профиль</h2>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  
+  <label>Телефон:</label><br>
+  <input type="text" name="phone" value="{{ profile.phone }}" required><br><br>
+
+  <label>Возраст:</label><br>
+  <input type="number" name="age" value="{{ profile.age }}" required><br><br>
+
+  <label>Дата рождения:</label><br>
+  <input type="date" name="birth_date" value="{{ profile.birth_date|date:'Y-m-d' }}"><br><br>
+
+  <label>Пол:</label><br>
+  <select name="gender">
+    <option value="">Выбрать</option>
+    <option value="M" {% if profile.gender == "M" %}selected{% endif %}>Мужской</option>
+    <option value="F" {% if profile.gender == "F" %}selected{% endif %}>Женский</option>  
+  </select><br><br>
+
+  <label>Фото:</label><br>
+  {% if profile.image %}
+    <img src="{{ profile.image.url }}" alt="Фото профиля" style="max-width:150px;"><br>
+  {% endif %}
+  <input type="file" name="image"><br><br>
+
+  <button type="submit">Сохранить</button>
+</form>
